@@ -5,6 +5,7 @@ class Map {
     constructor(){
         this.mapTile = null;
         this.markers = [];
+        this.markerClusters = new L.MarkerClusterGroup(); // initialisation du groupe de clusters
         this.APIUrl = "https://api.jcdecaux.com/vls/v1/stations?contract=Marseille&apiKey=c3b2a4d1db7b0ee5133b1b7fa4f5a6bc17d6d6e0";
         this.iconGreen = L.icon({
             iconUrl: '../images/green.svg',
@@ -40,16 +41,18 @@ class Map {
         this.ajax.ajaxGet(this.APIUrl, (stations) => {
         stations.forEach((station) => {
             if (station.status === "OPEN" && station.available_bikes !== 0) {
-                let marker = L.marker([station.position.lat, station.position.lng]).addMarkerActive().addTo(this.mapTile);
-                this.markers.push(marker);         
+                let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconGreen);
+                this.markers.push(marker);   
+                this.markerClusters.addLayer(marker);      
             } else {
-                let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconRed).addTo(this.mapTile);
-                this.markers.push(marker); 
+                let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconRed);
+                this.markers.push(marker);
+                this.markerClusters.addLayer(marker); 
             }
             
 
             })
-           
+           this.mapTile.addLayer(this.markerClusters);
         })
     
     }
