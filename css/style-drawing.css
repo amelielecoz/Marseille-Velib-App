@@ -1,0 +1,19 @@
+svg {
+    width : 400px;
+    height: 400px;
+    padding : 5px;
+}
+path {
+    stroke : #333;
+    stroke-width : 2px;
+    fill: transparent;
+    stroke-dasharray : 600;
+    stroke-dashoffset: 2600;
+    animation : animate 5s linear infinite;
+}
+@keyframes animate {
+    to {
+            stroke-dashoffset: 0; 
+        stroke : #000;
+    }
+}
