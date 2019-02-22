@@ -40,7 +40,7 @@ class Map {
         this.ajax.ajaxGet(this.APIUrl, (stations) => {
         stations.forEach((station) => {
             if (station.status === "OPEN" && station.available_bikes !== 0) {
-                let marker = L.marker([station.position.lat, station.position.lng]).addMarkerActive().addTo(this.mapTile);
+                let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconGreen).addTo(this.mapTile);
                 this.markers.push(marker);         
             } else {
                 let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconRed).addTo(this.mapTile);
