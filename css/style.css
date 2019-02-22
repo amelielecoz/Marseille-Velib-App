@@ -1,0 +1,148 @@
+body {
+    padding : 0;
+    margin : 0;
+}
+
+#carte {
+    box-shadow: 5px 10px 18px #888888;
+    height : 500px;
+}
+#detail-station {
+    background-color: aliceblue;
+    height : 500px;
+    box-shadow: 5px 10px 18px #888888;
+    font-family: 'Montserrat', sans-serif;
+}
+#canvas {
+    background: white;
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block;
+    cursor:crosshair;
+}
+#form {
+    display : none;
+}
+
+.signature-block {
+  border:1px solid black;
+}
+  
+#signature-pad {
+    visibility : hidden;
+    height : 0px;
+}
+
+#alert-nom {
+    display: none;
+}
+#confirmation{
+    display : none;
+}
+#footer {
+    background-color: black;
+    color: dimgrey;
+}
+
+#canvas-img {
+    height: 100px;
+    width: 200px;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+
+
+/** Code Carousel **/
+
+
+.item {
+    margin: 40px 10px;
+    background-color: #fff;
+    box-shadow: 0 15px 35px #3232321a,0 5px 15px #0000001a;
+    transition: transform 0.3s;
+    transform: translate3d(0, -1px, 0);
+}
+
+.item:hover {
+    transform: translate3d(0, -10px, 0);
+}
+
+.item img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.item__body{
+    padding: 25px;
+}
+
+.item__title {
+    font-size: 24px; 
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #232323;
+}
+
+.item__description {
+    color: #585858;
+}
+
+.items {
+    position: relative;
+    height : 300px
+}
+
+/**
+CAROUSEL
+**/
+.carousel {
+    position: relative;
+
+}
+.carousel__container{
+    transition : transform 0.3s;
+    transform : translate3d(0,0,0);
+}
+.carousel__container::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+.carousel__item {
+    float : left;
+}
+
+.carousel__next, .carousel__prev {
+    position: absolute;
+    width : 40px;
+    height : 40px;
+    background: #FFF url(../images/next.svg) center center no-repeat;
+    background-size: 20px 20px;
+    border-radius: 50%;
+    top: 50%;
+    margin-top: -20px;
+    right: 0px;
+    box-shadow: 0 15px 35px #3232321a,0 5px 15px #0000001a;
+    cursor : pointer;
+    transition : transform 0.3s, opacity: 0.3s;
+}
+.carousel__next:hover, .carousel__prev:hover {
+    transform : scale(1.2);
+}
+.carousel__prev {
+    background-image: url(../images/back.svg);
+    right: auto;
+    left: -20px;
+}
+
+.carousel__next--hidden, .carousel__prev--hidden {
+    opacity: 0;
+}
