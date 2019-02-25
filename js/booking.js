@@ -1,7 +1,7 @@
 //crée la classe réservation pour gérer l'ajout du nom
 
 class Booking {
-    constructor(alertElt, formElt, addressElt, standsElt, bikesElt, stationInfos) {
+    constructor(alertElt, formElt, addressElt, standsElt, bikesElt, stationInfos, validationButton) {
         this.alertElt = alertElt;
         this.formElt = formElt;
         this.addressElt = addressElt; 
@@ -10,7 +10,9 @@ class Booking {
         this.stationInfos = stationInfos;
         this.validationButton = validationButton;
     }
-
+    /**
+     * Affiche les détails de la station et le formulaire de réservation
+     */
     authorizeBooking() {
         document.getElementById(this.alertElt).innerHTML ='<div class="alert alert-success" role="alert"> Réservation possible </div>';
         document.getElementById(this.formElt).style.display= 'block';
@@ -20,6 +22,9 @@ class Booking {
         localStorage.setItem("adresse", this.stationInfos.address);
     }
 
+    /**
+     * Affiche une alerte indiquant que la station est fermée
+     */
     blockBooking() {
         document.getElementById(this.alertElt).innerHTML = '<div class="alert alert-danger" role="alert"> Réservation non disponible </div>';
         document.getElementById(this.formElt).style.display = "none";
@@ -33,27 +38,25 @@ class Booking {
      * @param {String} canvasField 
      * @param {String} validationBtn 
      */
-    showSignaturePad(firstNameField, nameField, signatureField, canvasField, validationBtn) {
+    showSignaturePad(firstNameField, nameField, signatureField, canvasField) {
         document.getElementById(this.validationButton).addEventListener("click", function(e) {
             let prenom = document.getElementById(firstNameField);
             let nom = document.getElementById(nameField);
             let signaturePad = document.getElementById(signatureField);
             let canvas = document.getElementById(canvasField);
 
-            let validationButton = document.getElementById(validationBtn);
-            validationButton.addEventListener('click', function(e) {
-                if(prenom.value != "" && nom.value!= "") {
-                    signaturePad.style.visibility ="visible";
-                    signaturePad.style.height = "300px";
-                    // document.getElementById("alert-nom").style.display = "none";
-                    // document.getElementById("h1-reservation").innerHTML = "Votre réservation";
-                    // document.getElementById("h1-details").innerHTML = "Une fois validée, vout trouverez les détails de votre réservation dans le footer ci-dessous.";
-                } else {
-                    signaturePad.style.visibility = "hidden";
-                    // document.getElementById("alert-nom").style.display = "block";
-                }
-            });
-        })
+            if(prenom.value != "" && nom.value!= "") {
+                signaturePad.style.visibility ="visible";
+                signaturePad.style.height = "300px";
+                // document.getElementById("alert-nom").style.display = "none";
+                // document.getElementById("h1-reservation").innerHTML = "Votre réservation";
+                // document.getElementById("h1-details").innerHTML = "Une fois validée, vout trouverez les détails de votre réservation dans le footer ci-dessous.";
+            } else {
+                signaturePad.style.visibility = "hidden";
+                // document.getElementById("alert-nom").style.display = "block";
+            }
+        });
+        
     }
     
 
