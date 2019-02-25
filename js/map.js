@@ -45,14 +45,18 @@ class Map {
                 this.markers.push(marker);   
                 this.markerClusters.addLayer(marker); 
                 //Gestion de l'affichage des détails au clic sur le marqueur
-                marker.addEventListener('click', function () {
+                marker.addEventListener('click', function (e) {
+                    this.booking = new Booking("#alert", "#form");
+                    this.booking.authorizeBooking();
                 })   
             } else {
                 let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconRed);
                 this.markers.push(marker);
                 this.markerClusters.addLayer(marker); 
                 //Gestion de l'affichage des détails au clic sur le marqueur
-                marker.addEventListener('click', function () {
+                marker.addEventListener('click', function (e) {
+                    this.booking = new Booking("#alert", "#form");
+                    this.booking.preventBooking();
                 })  
             }
             
