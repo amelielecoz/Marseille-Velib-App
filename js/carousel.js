@@ -25,7 +25,6 @@ class Carousel {
         this.root = this.createDivWithClass('carousel');
         this.container = this.createDivWithClass('carousel__container');
         this.root.appendChild(this.container);
-        this.root.setAttribute('tabindex', '0');
         this.element.appendChild(this.root);
         this.items = children.map((child) => {
             let item = this.createDivWithClass('carousel__item');
