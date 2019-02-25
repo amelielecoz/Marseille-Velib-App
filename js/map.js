@@ -46,7 +46,7 @@ class Map {
                 this.markerClusters.addLayer(marker); 
                 //Gestion de l'affichage des détails au clic sur le marqueur
                 marker.addEventListener('click', function (e) {
-                    this.booking = new Booking("alert", "form");
+                    this.booking = new Booking("alert", "form", "adresse", "velos-disponibles", "places-disponibles", station);
                     this.booking.authorizeBooking();
                 })   
             } else {
