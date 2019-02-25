@@ -43,11 +43,17 @@ class Map {
             if (station.status === "OPEN" && station.available_bikes !== 0) {
                 let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconGreen);
                 this.markers.push(marker);   
-                this.markerClusters.addLayer(marker);      
+                this.markerClusters.addLayer(marker); 
+                //Gestion de l'affichage des détails au clic sur le marqueur
+                marker.addEventListener('click', function () {
+                })   
             } else {
                 let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconRed);
                 this.markers.push(marker);
                 this.markerClusters.addLayer(marker); 
+                //Gestion de l'affichage des détails au clic sur le marqueur
+                marker.addEventListener('click', function () {
+                })  
             }
             
 
@@ -55,6 +61,16 @@ class Map {
            this.mapTile.addLayer(this.markerClusters);
         })
     
+    }
+    /**
+     * Gère l'évenement au clic sur la station
+     * @param {event} event 
+     * @param {Function} cb 
+     */
+    addEventListener (event, cb) {
+        this.popup.addEventListener('add', () => {
+            this.popup.addEventListener(event, cb);
+        })
     }
     
 }
