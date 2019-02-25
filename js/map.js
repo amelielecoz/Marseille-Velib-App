@@ -56,7 +56,7 @@ class Map {
                 //Gestion de l'affichage des détails au clic sur le marqueur
                 marker.addEventListener('click', function (e) {
                     this.booking = new Booking("alert", "form");
-                    this.booking.preventBooking();
+                    this.booking.blockBooking();
                 })  
             }
             

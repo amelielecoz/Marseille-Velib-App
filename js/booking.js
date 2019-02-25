@@ -19,7 +19,7 @@ class Booking {
         localStorage.setItem("adresse", this.stationInfos.address);
     }
 
-    preventBooking() {
+    blockBooking() {
         document.getElementById(this.alertElt).innerHTML = '<div class="alert alert-danger" role="alert"> Réservation non disponible </div>';
         document.getElementById(this.formElt).style.display = "none";
     }
