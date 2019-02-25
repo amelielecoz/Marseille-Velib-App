@@ -7,7 +7,8 @@ class Booking {
         this.addressElt = addressElt; 
         this.standsElt = standsElt;
         this.bikesElt = bikesElt;
-        this.stationInfos = stationInfos
+        this.stationInfos = stationInfos;
+        this.validationButton = validationButton;
     }
 
     authorizeBooking() {
@@ -22,6 +23,37 @@ class Booking {
     blockBooking() {
         document.getElementById(this.alertElt).innerHTML = '<div class="alert alert-danger" role="alert"> Réservation non disponible </div>';
         document.getElementById(this.formElt).style.display = "none";
+    }
+
+    /**
+     * Affiche le canvas de signature si le formulaire est correctement complété
+     * @param {String} firstNameField 
+     * @param {String} nameField 
+     * @param {String} signatureField 
+     * @param {String} canvasField 
+     * @param {String} validationBtn 
+     */
+    showSignaturePad(firstNameField, nameField, signatureField, canvasField, validationBtn) {
+        document.getElementById(this.validationButton).addEventListener("click", function(e) {
+            let prenom = document.getElementById(firstNameField);
+            let nom = document.getElementById(nameField);
+            let signaturePad = document.getElementById(signatureField);
+            let canvas = document.getElementById(canvasField);
+
+            let validationButton = document.getElementById(validationBtn);
+            validationButton.addEventListener('click', function(e) {
+                if(prenom.value != "" && nom.value!= "") {
+                    signaturePad.style.visibility ="visible";
+                    signaturePad.style.height = "300px";
+                    // document.getElementById("alert-nom").style.display = "none";
+                    // document.getElementById("h1-reservation").innerHTML = "Votre réservation";
+                    // document.getElementById("h1-details").innerHTML = "Une fois validée, vout trouverez les détails de votre réservation dans le footer ci-dessous.";
+                } else {
+                    signaturePad.style.visibility = "hidden";
+                    // document.getElementById("alert-nom").style.display = "block";
+                }
+            });
+        })
     }
     
 
