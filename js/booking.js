@@ -38,22 +38,26 @@ class Booking {
      * @param {String} canvasField 
      * @param {String} validationBtn 
      */
-    showSignaturePad(firstNameField, nameField, signatureField, canvasField) {
+    showSignaturePad(firstNameField, nameField, signatureField, canvasField, alertNom) {
         document.getElementById(this.validationButton).addEventListener("click", function(e) {
             let prenom = document.getElementById(firstNameField);
             let nom = document.getElementById(nameField);
             let signaturePad = document.getElementById(signatureField);
-            let canvas = document.getElementById(canvasField);
+            let canvas = new Canvas(canvasField, "valide-signature", "efface-signature");
+            
 
             if(prenom.value !== "" && nom.value!== "") {
                 signaturePad.style.visibility ="visible";
                 signaturePad.style.height = "300px";
-                // document.getElementById("alert-nom").style.display = "none";
-                // document.getElementById("h1-reservation").innerHTML = "Votre réservation";
-                // document.getElementById("h1-details").innerHTML = "Une fois validée, vout trouverez les détails de votre réservation dans le footer ci-dessous.";
+                canvas.initDraw();
+                canvas.effaceSignature();
+                canvas.enregistreSignature();
+                document.getElementById(alertNom).style.display = "none";
+                document.getElementById("h1-reservation").innerHTML = "Votre réservation";
+                document.getElementById("h1-details").innerHTML = "Une fois validée, vout trouverez les détails de votre réservation dans le footer ci-dessous.";
             } else {
                 signaturePad.style.visibility = "hidden";
-                // document.getElementById("alert-nom").style.display = "block";
+                document.getElementById(alertNom).style.display = "block";
             }
         });
         
