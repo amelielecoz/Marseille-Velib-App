@@ -31,7 +31,6 @@ class Map {
             attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'
         }).addTo(this.mapTile);
         this.addMarkers();
-        console.log(this.markers)
     }
 
     //chargement des stations
@@ -46,8 +45,9 @@ class Map {
                 this.markerClusters.addLayer(marker); 
                 //Gestion de l'affichage des détails au clic sur le marqueur
                 marker.addEventListener('click', function (e) {
-                    this.booking = new Booking("alert", "form", "adresse", "velos-disponibles", "places-disponibles", station);
+                    this.booking = new Booking("alert", "form", "adresse", "velos-disponibles", "places-disponibles", station, "valide-nom");
                     this.booking.authorizeBooking();
+                    this.booking.showSignaturePad("prenom", "nom", "signature-pad", "canvas")
                 })   
             } else {
                 let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconRed);
