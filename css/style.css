@@ -1,6 +1,7 @@
 body {
     padding : 0;
     margin : 0;
+    overflow-y : hidden;
 }
 
 #carte {
@@ -25,13 +26,20 @@ body {
 }
 
 .signature-block {
-  border:1px solid black;
+  border: 1px solid black;
 }
   
 #signature-pad {
     visibility : hidden;
     height : 0px;
 }
+
+@media screen and (min-width : 600px) {
+    .card {
+        width : 400px;
+    }
+}
+
 
 #alert-nom {
     display: none;
