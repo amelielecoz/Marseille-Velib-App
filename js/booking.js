@@ -1,5 +1,4 @@
 //crée la classe réservation pour gérer l'ajout du nom
-
 class Booking {
     constructor(alertElt, formElt, addressElt, standsElt, bikesElt, stationInfos, validationButton) {
         this.alertElt = alertElt;
@@ -10,6 +9,7 @@ class Booking {
         this.stationInfos = stationInfos;
         this.validationButton = validationButton;
     }
+
     /**
      * Affiche les détails de la station et le formulaire de réservation
      */
@@ -45,7 +45,7 @@ class Booking {
             let signaturePad = document.getElementById(signatureField);
             let canvas = document.getElementById(canvasField);
 
-            if(prenom.value != "" && nom.value!= "") {
+            if(prenom.value !== "" && nom.value!== "") {
                 signaturePad.style.visibility ="visible";
                 signaturePad.style.height = "300px";
                 // document.getElementById("alert-nom").style.display = "none";
