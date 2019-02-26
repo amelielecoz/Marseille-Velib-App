@@ -26,7 +26,7 @@ class Map {
      * @param {HTMLElement} element 
      */
     load(element) {
-        this.mapTile = L.map(element).setView([43.300000, 5.400000], 13);
+        this.mapTile = L.map(element).setView([43.280000, 5.390000], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
             attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'
         }).addTo(this.mapTile);
@@ -47,7 +47,8 @@ class Map {
                 marker.addEventListener('click', function (e) {
                     this.booking = new Booking("alert", "form", "adresse", "velos-disponibles", "places-disponibles", station, "valide-nom");
                     this.booking.authorizeBooking();
-                    this.booking.showSignaturePad("prenom", "nom", "signature-pad", "canvas")
+                    this.booking.showSignaturePad("prenom", "nom", "signature-pad", "canvas", "alert-nom")
+                    
                 })   
             } else {
                 let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconRed);
