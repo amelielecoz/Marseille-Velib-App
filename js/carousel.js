@@ -34,12 +34,14 @@ class Carousel {
         })
         this.setStyle();
         this.createNavigation();
+        this.timer();
         
         
         //Evènements
         this.moveCallbacks.forEach(callback => callback(0));
         this.onWindowResize(); //appelle la fonction dès le début 
         window.addEventListener('resize', this.onWindowResize.bind(this));
+        
         this.root.addEventListener('keyup', (e) => {
             if (e.key === 'ArrowRight' || e.key === 'Right') { //gère tous les navigateurs
                 this.next();
@@ -89,7 +91,15 @@ class Carousel {
     prev() {
         this.goToItem(this.currentItem - this.slidesToScroll)
     }
-
+    /**
+     * Défilement automatique des slides
+     */
+    timer() {
+        setInterval( () => {
+            window.addEventListener('load', this.next())
+        }, 5000);
+    }
+    
     /**
      * Déplace le carousel vers l'élément ciblé
      * @param {number} index
