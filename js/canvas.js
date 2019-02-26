@@ -106,6 +106,8 @@ class Canvas {
         
             document.getElementById("h1-reservation").innerHTML = "Réservation confirmée";
             document.getElementById("h1-details").innerHTML = prenom.value.toUpperCase() + ", votre réservation est valable pour 20 minutes.";
+
+            let confirmation = new Confirmation("confirmation", "timer", "annuler");
         });
     }
 
