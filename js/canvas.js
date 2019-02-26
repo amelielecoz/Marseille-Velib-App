@@ -90,14 +90,14 @@ class Canvas {
      * Fonction pour effacer la signature
      */
     effaceSignature() {
-        this.clearButton.addEventListener("click", function() {
+        this.clearButton.addEventListener("click", ()=> {
             this.ctx.clearRect(0, 0, canvas.width, canvas.height)
         });
     }
     
     
     enregistreSignature() {
-        this.saveButton.addEventListener("click", function() {
+        this.saveButton.addEventListener("click", () => {
             var dataCanvas = canvas.toDataURL();
             var canvasImage = document.getElementById("canvas-img");
             canvasImage.src = dataCanvas;
