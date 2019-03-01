@@ -33,8 +33,9 @@ class Map {
         this.addMarkers();
     }
 
-    //chargement des stations
-    
+    /**
+     * Charge les stations, applique l'icône vert ou rouge en fonction du statut et du nombre de vélos 
+     */
     addMarkers() {
         this.ajax = new Ajax(this.APIUrl);
         this.ajax.ajaxGet(this.APIUrl, (stations) => {
@@ -44,8 +45,9 @@ class Map {
                 this.markers.push(marker);   
                 this.markerClusters.addLayer(marker); 
                 //Gestion de l'affichage des détails au clic sur le marqueur
-                marker.addEventListener('click', function (e) {
+                marker.addEventListener('click', (e) => {
                     this.booking = new Booking("alert", "form", "adresse", "velos-disponibles", "places-disponibles", station, "valide-nom");
+                    this.booking.fillUpNames("prenom", "nom")
                     this.booking.authorizeBooking();
                     this.booking.showSignaturePad("prenom", "nom", "signature-pad", "canvas", "alert-nom")
                     
@@ -55,7 +57,7 @@ class Map {
                 this.markers.push(marker);
                 this.markerClusters.addLayer(marker); 
                 //Gestion de l'affichage des détails au clic sur le marqueur
-                marker.addEventListener('click', function (e) {
+                marker.addEventListener('click', (e) => {
                     this.booking = new Booking("alert", "form");
                     this.booking.blockBooking();
                 })  

@@ -1,5 +1,5 @@
 //On attend le chargement du DOM car le script est asynchrone
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
 
     new Carousel (document.querySelector('#diaporama'), {
         slidesVisible: 1, 
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let $map = document.querySelector('#carte');
 
-const initMap = function() {
+const initMap = () => {
     let map = new Map();
     map.load($map);
 }
