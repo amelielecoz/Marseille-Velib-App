@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new Carousel (document.querySelector('#diaporama'), {
         slidesVisible: 1, 
         slidesToScroll: 1, 
-        loop: false
+        loop: true
     })
 })
 

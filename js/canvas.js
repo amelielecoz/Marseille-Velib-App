@@ -46,6 +46,7 @@ class Canvas {
         this.ctx.lineTo(x, y);
         this.ctx.stroke();
         [this.lastX, this.lastY] = [x, y];
+        this.drawEmpty = false;
     }
 
     
@@ -70,10 +71,9 @@ class Canvas {
         //Dessine
         canvas.addEventListener("mousemove", (e) => {
             this.draw(e.offsetX, e.offsetY);
-            this.drawEmpty = false;
         });
-        canvas.addEventListener("touchmove", e => {
-            if (e.touches && e.touches.length == 1) {
+        canvas.addEventListener("touchmove", (e) => {
+            if (e.touches && e.touches.length === 1) {
             let touch = e.touches[0];
             let touchX = touch.pageX - touch.target.offsetLeft;
             let touchY = touch.pageY - touch.target.offsetTop;
@@ -105,9 +105,9 @@ class Canvas {
     }
     
     
-    enregistreSignature(signaturePad) {
+    enregistreSignature() {
         this.saveButton.addEventListener("click", () => {
-            if ( this.drawEmpty !== true ) {
+            if (this.drawEmpty !== true ) {
                 let dataCanvas = canvas.toDataURL();
                 let canvasImage = document.getElementById("canvas-img");
                 canvasImage.src = dataCanvas;

@@ -13,7 +13,6 @@ class Booking {
 
     fillUpNames(firstNameField, lastNameField) {
         let firstNameRegistered = localStorage.getItem('firstname');
-        console.log(firstNameRegistered)
         let lastNameRegistered = localStorage.getItem('lastname');
         if ( firstNameRegistered !== '' ) {
             document.getElementById(firstNameField).value = firstNameRegistered;
