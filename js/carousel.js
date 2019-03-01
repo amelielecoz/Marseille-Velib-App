@@ -29,6 +29,8 @@ class Carousel {
         this.items = children.map((child) => {
             let item = this.createDivWithClass('carousel__item');
             item.appendChild(child);
+            item.addEventListener('mouseover', this.pause.bind(this))
+            item.addEventListener('mouseout', () => this.options.slidesToScroll = 1)
             this.container.appendChild(item);
             return item;
         })
@@ -49,6 +51,8 @@ class Carousel {
                 this.prev();
             }
         })
+
+
     }
 
     /**
@@ -63,10 +67,14 @@ class Carousel {
     createNavigation() {
         let nextButton = this.createDivWithClass('carousel__next');
         let prevButton = this.createDivWithClass('carousel__prev');
+        let pauseButton = this.createDivWithClass('carousel__pause');
         this.root.appendChild(nextButton);
         this.root.appendChild(prevButton);
+        this.root.appendChild(pauseButton);
         nextButton.addEventListener('click', this.next.bind(this));
         prevButton.addEventListener('click', this.prev.bind(this));
+        pauseButton.addEventListener('mouseover', this.pause.bind(this));
+        pauseButton.addEventListener('mouseout', () => this.options.slidesToScroll = 1);
         this.onMove(index => {
             if(this.options.loop === true) {
                 return
@@ -90,6 +98,10 @@ class Carousel {
 
     prev() {
         this.goToItem(this.currentItem - this.slidesToScroll)
+    }
+
+    pause() {
+        this.options.slidesToScroll = 0;
     }
     /**
      * Défilement automatique des slides
