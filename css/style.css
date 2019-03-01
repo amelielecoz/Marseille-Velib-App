@@ -40,7 +40,9 @@ body {
     }
 }
 
-
+#alert-signature{
+    display : none;
+}
 #alert-nom {
     display: none;
 }
