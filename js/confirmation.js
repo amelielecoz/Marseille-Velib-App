@@ -5,48 +5,54 @@ class Confirmation {
         this.confirmation = document.getElementById(this.element);
         this.interval;
         this.cancelElt = cancelElt;
-        this.countdown();
+        // this.cancelBooking(this.cancelElt); 
+      
         this.confirmBooking();
-        this.cancelBooking(cancelElt);
-        let timer = "20:00";
-        document.getElementById(this.timerId).textContent = timer;
-        
+              
     }
 
     /**
      * Compte à rebours
      */
-    countdown() {
+    startTimer() {
         // clearInterval(interval);
-        setInterval( () => {
-            timer = timer.split(':');
-            let minutes = timer[0];
-            let seconds = timer[1];
+        let minutes = 20;
+        let seconds = 0;
+        this.interval = setInterval( () => {            
             seconds -= 1;
             if (minutes < 0) return;
-            else if (seconds < 0 && minutes != 0) {
+            else if (seconds < 0 && minutes !== 0) {
                 minutes -= 1;
                 seconds = 59;
+            
             }
-            else if (seconds < 10 && length.seconds != 2) {
-                seconds = '0' + seconds;
-                timer = (minutes + ':' + seconds);
-            }
-            localStorage.setItem("timer", timer);  
+            localStorage.setItem("seconds", seconds);  
+            localStorage.setItem("minutes", minutes);  
 
             if (minutes === 0 && seconds === 0) {
-                clearInterval(interval);
-                localStorage.removeItem('timer')
-                //annulation();
+               resetTimer();
             }
+            document.getElementById(this.timerId).innerHTML = minutes + ':' + seconds ;
+
+           
+        
         }, 1000);
     }
 
+    resetTimer() {
+        
+        localStorage.removeItem('seconds');
+        localStorage.removeItem('minutes');
+        this.cancelBooking();
+    }
+
     confirmBooking() {
+        
+        this.resetTimer();
+        this.startTimer();
         var address = localStorage.getItem("adresse");
         document.getElementById("adresse-validee").innerHTML = address;
-        this.countdown();
-        setInterval(this.countdown(), 1000); //Déclenchement du compte à rebours
+        
         this.confirmation.style.display = "block";
         let signaturePad = document.getElementById("signature-pad")
         signaturePad.style.visibility ="hidden";
@@ -56,12 +62,15 @@ class Confirmation {
         
     }
 
-    cancelBooking(cancelElt) {
-        let btnAnnuler = document.getElementById(cancelElt);
+
+    cancelBooking() {
+        let btnAnnuler = document.getElementById(this.cancelElt);
         btnAnnuler.addEventListener('click', () => {
+            clearInterval(this.interval);
+            document.getElementById(this.timerId).innerHTML = '' ;
             this.confirmation.style.display = "none";
             document.getElementById("h1-reservation").innerHTML = "Réservation annulée";
             document.getElementById("h1-details").innerHTML = "";
-        });
-    }
+        }
+    )};
 } 
