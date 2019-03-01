@@ -10,6 +10,24 @@ class Booking {
         this.validationButton = validationButton;
     }
 
+
+    fillUpNames(firstNameField, lastNameField) {
+        let firstNameRegistered = localStorage.getItem('firstname');
+        console.log(firstNameRegistered)
+        let lastNameRegistered = localStorage.getItem('lastname');
+        if ( firstNameRegistered !== '' ) {
+            document.getElementById(firstNameField).value = firstNameRegistered;
+        } else {
+            document.getElementById(firstNameField).value = '';
+            document.getElementById(firstNameField).placeholder = 'Prénom';
+        }
+        if ( lastNameRegistered !== '' ) {
+            document.getElementById(lastNameField).value = lastNameRegistered;
+        } else {
+            document.getElementById(lastNameField).value = '';
+            document.getElementById(firstNameField).placeholder = 'Nom'
+        }
+    }
     /**
      * Affiche les détails de la station et le formulaire de réservation
      */
@@ -30,6 +48,8 @@ class Booking {
         document.getElementById(this.formElt).style.display = "none";
     }
 
+
+
     /**
      * Affiche le canvas de signature si le formulaire est correctement complété
      * @param {String} firstNameField 
@@ -38,15 +58,18 @@ class Booking {
      * @param {String} canvasField 
      * @param {String} validationBtn 
      */
-    showSignaturePad(firstNameField, nameField, signatureField, canvasField, alertNom) {
+    showSignaturePad(firstNameField, lastNameField, signatureField, canvasField, alertNom) {
         document.getElementById(this.validationButton).addEventListener("click", function(e) {
-            let prenom = document.getElementById(firstNameField);
-            let nom = document.getElementById(nameField);
+            let prenom = document.getElementById(firstNameField).value;
+            let nom = document.getElementById(lastNameField).value;
+
+            localStorage.setItem("lastname", nom);
+            localStorage.setItem("firstname", prenom);
             let signaturePad = document.getElementById(signatureField);
             let canvas = new Canvas(canvasField, "valide-signature", "efface-signature");
             
 
-            if(prenom.value !== "" && nom.value!== "") {
+            if(prenom !== "" && nom !== "") {
                 signaturePad.style.visibility ="visible";
                 signaturePad.style.height = "300px";
                 canvas.initDraw();
@@ -62,6 +85,8 @@ class Booking {
         });
         
     }
+
+
     
 
 }
