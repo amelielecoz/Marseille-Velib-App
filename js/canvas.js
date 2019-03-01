@@ -29,8 +29,8 @@ class Canvas {
         this.initDraw();
         this.effaceSignature();
         this.enregistreSignature();
-    }
 
+    }
 
 
     /**
@@ -70,6 +70,7 @@ class Canvas {
         //Dessine
         canvas.addEventListener("mousemove", (e) => {
             this.draw(e.offsetX, e.offsetY);
+            this.drawEmpty = false;
         });
         canvas.addEventListener("touchmove", e => {
             if (e.touches && e.touches.length == 1) {
@@ -83,15 +84,12 @@ class Canvas {
         //Termine le dessin
         canvas.addEventListener("mouseup", () => {
             this.isDrawing = false;
-            this.drawEmpty = false;
         });
         canvas.addEventListener('mouseout', () => {
             this.isDrawing = false;
-            this.drawEmpty = false;
         });
         canvas.addEventListener("touchend", () => {
             this.isDrawing = false;
-            this.drawEmpty = false;
         });
     }
 
@@ -107,22 +105,30 @@ class Canvas {
     }
     
     
-    enregistreSignature() {
-        if ( this.drawEmpty !== true ) {
-            this.saveButton.addEventListener("click", () => {
-                var dataCanvas = canvas.toDataURL();
-                var canvasImage = document.getElementById("canvas-img");
+    enregistreSignature(signaturePad) {
+        this.saveButton.addEventListener("click", () => {
+            if ( this.drawEmpty !== true ) {
+                let dataCanvas = canvas.toDataURL();
+                let canvasImage = document.getElementById("canvas-img");
                 canvasImage.src = dataCanvas;
                 canvasImage.style.display = "block";
-                localStorage.setItem("canvas", dataCanvas);
-            
+                
+                document.getElementById("alert-signature").style.display = "none";
+                document.getElementById("h1-reservation").style.display = "block";
                 document.getElementById("h1-reservation").innerHTML = "Réservation confirmée";
+                document.getElementById("h1-details").style.display = "block";
                 document.getElementById("h1-details").innerHTML = prenom.value.toUpperCase() + ", votre réservation est valable pour 20 minutes.";    
-            }
-            
-            });
-        }
+                let confirmation = new Confirmation("confirmation", "timer", "annuler");
 
+                localStorage.setItem("canvas", dataCanvas);
+            } else {
+                document.getElementById("alert-signature").style.display = "block";
+                document.getElementById("h1-reservation").style.display = "none";
+                document.getElementById("h1-details").style.display = "none";
+            }
+        });
+        
+    }
 
 }
 
