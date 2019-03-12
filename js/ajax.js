@@ -1,14 +1,13 @@
-// Exécute un appel AJAX GET
-// Prend en paramètres l'URL cible et la fonction callback appelée en cas de succès
-
 class Ajax {
     
+    /**
+    * @description Exécute un appel AJAX GET
+    * @param {string} URL cible
+    * @param {Function} fonction callback appelée en cas de succès
+    */
     ajaxGet(url, callback) {
         this.req = new XMLHttpRequest();
         this.req.open("GET", url);
-        // this.req.setRequestHeader("Access-Control-Allow-Origin", "*");
-        // this.req.setRequestHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
-        // this.req.setRequestHeader("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token");
         this.req.addEventListener("load", () => {
             if (this.req.status >= 200 && this.req.status < 400) {
                 // Appelle la fonction callback en lui passant la réponse de la requête
