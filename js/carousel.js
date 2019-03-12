@@ -7,8 +7,7 @@ class Carousel {
      * @param {Boolean} options.loop Indique si le carousel doit boucler 
      */
 
-    constructor(element, options={}) {  //Si aucun paramètre n'est défini pour les options, on utilisera un objet vide par défaut
-        
+    constructor(element, options={}) { 
         //Définition
         this.element = element;
         this.options = Object.assign({}, {
@@ -20,7 +19,6 @@ class Carousel {
         this.isMobile = true;
         this.currentItem = 0;
         this.moveCallbacks = [];
-
         //Modification du DOM
         this.root = this.createDivWithClass('carousel');
         this.container = this.createDivWithClass('carousel__container');
@@ -37,13 +35,10 @@ class Carousel {
         this.setStyle();
         this.createNavigation();
         this.timer();
-        
-        
         //Evènements
         this.moveCallbacks.forEach(callback => callback(0));
         this.onWindowResize(); //appelle la fonction dès le début 
         window.addEventListener('resize', this.onWindowResize.bind(this));
-        
         this.root.addEventListener('keyup', (e) => {
             if (e.key === 'ArrowRight' || e.key === 'Right') { //gère tous les navigateurs
                 this.next();
@@ -51,12 +46,10 @@ class Carousel {
                 this.prev();
             }
         })
-
-
     }
 
     /**
-     * Méthode qui applique les bonnes dimensions aux éléments du carousel
+     * @description Applique les bonnes dimensions aux éléments du carousel
      */
     setStyle() {
         let ratio = this.items.length / this.slidesVisible;
@@ -64,6 +57,9 @@ class Carousel {
         this.items.forEach(item => item.style.width = ((100 / this.slidesVisible) / ratio) + "%")
     }
 
+    /**
+     * @description Ajoute les boutons de navigation
+     */
     createNavigation() {
         let nextButton = this.createDivWithClass('carousel__next');
         let prevButton = this.createDivWithClass('carousel__prev');
@@ -90,21 +86,31 @@ class Carousel {
                 nextButton.classList.remove('carousel__next--hidden')
             }
         })
-        }
+    }
 
+    /**
+     * @description Fait défiler les slides vers la droite
+     */
     next() {
         this.goToItem(this.currentItem + this.slidesToScroll)
     }
 
+    /**
+     * @description Fait défiler les slides vers la gauche
+     */
     prev() {
         this.goToItem(this.currentItem - this.slidesToScroll)
     }
 
+    /**
+     * @description Pause le défilement
+     */
     pause() {
         this.options.slidesToScroll = 0;
     }
+
     /**
-     * Défilement automatique des slides
+     * Défilement automatique des slides toutes les 5s
      */
     timer() {
         setInterval( () => {
@@ -142,6 +148,9 @@ class Carousel {
         this.moveCallbacks.push(callback)
     }
 
+    /**
+     * @description Redéfini le style si la fenêtre est redimensionnée
+     */
     onWindowResize() {
         let mobile = window.innerWidth < 600; //on est sur mobile si la largeur de la fenêtre est inférieure à 600px
         if (mobile !== this.isMobile) { 
@@ -162,16 +171,16 @@ class Carousel {
         return div
     }
 
-/**
- * @returns {number}
- */
+    /**
+     * @returns {number} Nombre de slides à faire défiler
+     */
     get slidesToScroll() {
         return this.isMobile ? 1 : this.options.slidesToScroll;
     }
 
-/**
- * @returns {number}
- */
+    /**
+     * @returns {number} Nombre de slides visibles
+     */
     get slidesVisible() {
         return this.isMobile ? 1 : this.options.slidesVisible;
     }
