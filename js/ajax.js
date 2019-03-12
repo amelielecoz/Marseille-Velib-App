@@ -3,7 +3,7 @@ class Ajax {
     /**
     * @description Exécute un appel AJAX GET
     * @param {string} URL cible
-    * @param {function} fonction callback appelée en cas de succès
+    * @param {Function} fonction callback appelée en cas de succès
     */
     ajaxGet(url, callback) {
         this.req = new XMLHttpRequest();
