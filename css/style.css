@@ -39,7 +39,7 @@ body {
         width : 400px;
     }
 }
-@media screen and (max-width : 600px) {
+@media screen and (max-width : 599px) {
     .card {
         width : 300px;
 
