@@ -8,12 +8,14 @@ body {
     box-shadow: 5px 10px 18px #888888;
     height : 500px;
 }
+
 #detail-station {
     background-color: aliceblue;
     height : 500px;
     box-shadow: 5px 10px 18px #888888;
     font-family: 'Montserrat', sans-serif;
 }
+
 #canvas {
     background: white;
     margin-left: auto; 
@@ -21,6 +23,7 @@ body {
     display: block;
     cursor:crosshair;
 }
+
 #form {
     display : none;
 }
@@ -39,22 +42,25 @@ body {
         width : 400px;
     }
 }
+
 @media screen and (max-width : 599px) {
     .card {
         width : 300px;
-
     }
 }
 
 #alert-signature{
     display : none;
 }
+
 #alert-nom {
     display: none;
 }
+
 #confirmation{
     display : none;
 }
+
 #footer {
     background-color: black;
     color: dimgrey;
@@ -72,11 +78,7 @@ body, html {
     overflow-x: hidden;
 }
 
-
-
-/** Code Carousel **/
-
-
+/** Carousel **/
 .item {
     margin: 40px 10px;
     background-color: #fff;
@@ -115,18 +117,17 @@ body, html {
     height : 300px
 }
 
-/**
-CAROUSEL
-**/
 .carousel {
     position: relative;
     max-width: 600px;
     margin : auto;
 }
+
 .carousel__container{
     transition : transform 0.3s;
     transform : translate3d(0,0,0);
 }
+
 .carousel__container::after {
     content: '';
     clear: both;
@@ -149,7 +150,7 @@ CAROUSEL
     right : -20px;
     box-shadow: 0 15px 35px #3232321a,0 5px 15px #0000001a;
     cursor : pointer;
-    transition : transform 0.3s, opacity: 0.3s;
+    transition : transform 0.3s, opacity 0.3s;
 }
 .carousel__next:hover, .carousel__prev:hover {
     transform : scale(1.3);
