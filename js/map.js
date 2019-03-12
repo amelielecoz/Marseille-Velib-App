@@ -22,7 +22,7 @@ class Map {
     }
 
     /**
-     * Charge la carte depuis OpenStreetMap de façon asynchrone et l'ajoute sur this.map
+     * @description Charge la carte depuis OpenStreetMap de façon asynchrone et l'ajoute sur this.map
      * @param {HTMLElement} element 
      */
     load(element) {
@@ -34,43 +34,40 @@ class Map {
     }
 
     /**
-     * Charge les stations, applique l'icône vert ou rouge en fonction du statut et du nombre de vélos 
+     * @description Charge les stations, applique l'icône vert ou rouge en fonction du statut et du nombre de vélos 
      */
     addMarkers() {
         this.ajax = new Ajax(this.APIUrl);
         this.ajax.ajaxGet(this.APIUrl, (stations) => {
-        stations.forEach((station) => {
-            if (station.status === "OPEN" && station.available_bikes !== 0) {
-                let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconGreen);
-                this.markers.push(marker);   
-                this.markerClusters.addLayer(marker); 
-                //Gestion de l'affichage des détails au clic sur le marqueur
-                marker.addEventListener('click', (e) => {
-                    this.booking = new Booking("alert", "form", "adresse", "velos-disponibles", "places-disponibles", station, "valide-nom");
-                    this.booking.fillUpNames("prenom", "nom")
-                    this.booking.authorizeBooking();
-                    this.booking.showSignaturePad("prenom", "nom", "signature-pad", "canvas", "alert-nom")
-                    
-                })   
-            } else {
-                let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconRed);
-                this.markers.push(marker);
-                this.markerClusters.addLayer(marker); 
-                //Gestion de l'affichage des détails au clic sur le marqueur
-                marker.addEventListener('click', (e) => {
-                    this.booking = new Booking("alert", "form");
-                    this.booking.blockBooking();
-                })  
-            }
-            
-
+            stations.forEach((station) => {
+                if (station.status === "OPEN" && station.available_bikes !== 0) {
+                    let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconGreen);
+                    this.markers.push(marker);   
+                    this.markerClusters.addLayer(marker); 
+                    //Gestion de l'affichage des détails au clic sur le marqueur
+                    marker.addEventListener('click', () => {
+                        this.booking = new Booking("alert", "form", "adresse", "velos-disponibles", "places-disponibles", station, "valide-nom");
+                        this.booking.fillUpNames("prenom", "nom")
+                        this.booking.authorizeBooking();
+                        this.booking.showSignaturePad("prenom", "nom", "signature-pad", "canvas", "alert-nom") 
+                    })   
+                } else {
+                    let marker = L.marker([station.position.lat, station.position.lng]).setIcon(this.iconRed);
+                    this.markers.push(marker);
+                    this.markerClusters.addLayer(marker); 
+                    //Gestion de l'affichage des détails au clic sur le marqueur
+                    marker.addEventListener('click', () => {
+                        this.booking = new Booking("alert", "form");
+                        this.booking.blockBooking();
+                    })  
+                }   
             })
-           this.mapTile.addLayer(this.markerClusters);
+            this.mapTile.addLayer(this.markerClusters);
         })
-    
     }
+
     /**
-     * Gère l'évenement au clic sur la station
+     * @description Gère l'évenement au clic sur la station
      * @param {event} event 
      * @param {Function} cb 
      */
@@ -79,7 +76,6 @@ class Map {
             this.popup.addEventListener(event, cb);
         })
     }
-    
 }
 
 

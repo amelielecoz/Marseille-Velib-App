@@ -39,8 +39,8 @@ class Booking {
 
     /**
      * Enregistre dans le local storage les noms et prénoms entrés dans le formulaire, puis modifie le placeholder
-     * @param {String} firstNameField 
-     * @param {String} lastNameField 
+     * @param {String} firstNameField champ du prénom
+     * @param {String} lastNameField champ du nom
      */
     fillUpNames(firstNameField, lastNameField) {
         let firstNameRegistered = localStorage.getItem('firstname');
@@ -85,10 +85,10 @@ class Booking {
      * @param {String} nameField Id de l'élément lié au champ "nom"
      * @param {String} signatureField Id de l'élément lié au champ "signature"
      * @param {String} canvasField Id de l'élément lié au canvas
-     * @param {String} validationBtn Id de l'élément lié au bouton de validation du formulaire
+     * @param {String} alertNom Id de l'élément d'alerte si le nom n'est pas correctement rempli
      */
     showSignaturePad(firstNameField, lastNameField, signatureField, canvasField, alertNom) {
-        document.getElementById(this.validationButton).addEventListener("click", function(e) {
+        document.getElementById(this.validationButton).addEventListener("click", () => {
             let prenom = document.getElementById(firstNameField).value;
             let nom = document.getElementById(lastNameField).value;
             localStorage.setItem("lastname", nom);
@@ -102,8 +102,8 @@ class Booking {
                 canvas.effaceSignature();
                 canvas.enregistreSignature();
                 document.getElementById(alertNom).style.display = "none";
-                setHtml("h1-reservation", "Votre réservation");
-                setHtml("h1-details", "Une fois validée, vout trouverez les détails de votre réservation dans le footer ci-dessous.") ;
+                this.setHtml("h1-reservation", "Votre réservation");
+                this.setHtml("h1-details", "Une fois validée, vout trouverez les détails de votre réservation dans le footer ci-dessous.") ;
             } else {
                 signaturePad.style.visibility = "hidden";
                 document.getElementById(alertNom).style.display = "block";
