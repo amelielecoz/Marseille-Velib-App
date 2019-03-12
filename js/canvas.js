@@ -61,8 +61,8 @@ class Canvas {
             if (e.touches && e.touches.length == 1) {
             this.isDrawing = true;
             let touch = e.touches[0];
-            let touchX = touch.pageX - touch.target.offsetLeft;
-            let touchY = touch.pageY - touch.target.offsetTop;
+            let touchX = touch.pageX;
+            let touchY = touch.pageY;
             [this.lastX, this.lastY] = [touchX, touchY];
             e.preventDefault();
             }
@@ -75,8 +75,8 @@ class Canvas {
         canvas.addEventListener("touchmove", (e) => {
             if (e.touches && e.touches.length === 1) {
             let touch = e.touches[0];
-            let touchX = touch.pageX - touch.target.offsetLeft;
-            let touchY = touch.pageY - touch.target.offsetTop;
+            let touchX = touch.pageX;
+            let touchY = touch.pageY;
             this.draw(touchX, touchY);
             }
         });
@@ -119,7 +119,6 @@ class Canvas {
                 document.getElementById("h1-details").style.display = "block";
                 document.getElementById("h1-details").innerHTML = prenom.value.toUpperCase() + ", votre réservation est valable pour 20 minutes.";    
                 let confirmation = new Confirmation("confirmation", "timer", "annuler");
-
                 localStorage.setItem("canvas", dataCanvas);
             } else {
                 document.getElementById("alert-signature").style.display = "block";

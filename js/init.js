@@ -8,9 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-
+//Selectionne le container carte dans le html
 let $map = document.querySelector('#carte');
 
+//Initialisation de la map
 const initMap = () => {
     let map = new Map();
     map.load($map);
